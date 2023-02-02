@@ -30,9 +30,10 @@
   background-color: #1E90FF;
   padding: 10px;
   margin-bottom: 10px;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: bolder;
   border-radius: 30px;
+  text-align: center;
 }
 .rooms_users_chat p {
   color: rgba(255, 255, 255, 0.9);
@@ -64,12 +65,24 @@
   line-height: 150%;
   word-wrap: break-word;
 }
+.messages_chat div p {
+  margin: 0;
+}
 .messages_chat div span:nth-child(1) {
   color: #4169E1;
   margin-right: 1rem;
 }
 .messages_chat div span:nth-child(2) {
   color: #d9534f;
+}
+.messages_chat div span:nth-child(4) {
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 0.9rem;
+}
+.messages_chat #message_bottom {
+  background-color: #F0F8FF;
+  color: rgba(0, 0, 0, 0.35);
+  text-align: center;
 }
 
 .send_chat {
@@ -83,6 +96,9 @@
 .send_chat form input {
   height: 100%;
   font-size: 1.3rem;
+}
+.send_chat form i {
+  font-size: 1.5rem;
 }
 
 * {
@@ -105,6 +121,7 @@
   grid-template-areas: "title title" "menu message" "chat chat";
   grid-template-columns: 1fr 3fr;
   grid-template-rows: 10% auto 15%;
+  overflow-anchor: none;
 }
 
 /*# sourceMappingURL=chat.css.map */

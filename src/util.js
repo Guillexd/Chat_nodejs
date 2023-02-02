@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 //function search database
-const search_db = async(path) => {
+export const search_db = async(path) => {
   if(!fs.existsSync(path)) return [];
   let db = await fs.promises.readFile(path, 'utf-8');
   db = JSON.parse(db);
@@ -31,7 +31,8 @@ export const add_chat = async(path, msj) => {
     id: await generate_id(path),
     name: msj.user,
     message: msj.mensaje,
-    date: now.format('dddd, MMMM D, YYYY H:mm a')
+    day: now.format('dddd, H:mm a'),
+    date: now.format('MMMM D, YYYY')
   }
 
   const db = await search_db(path);

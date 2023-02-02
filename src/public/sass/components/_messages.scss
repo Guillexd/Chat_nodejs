@@ -19,6 +19,9 @@
     border-radius: 15px;
     line-height: 150%;
     word-wrap: break-word;//wrap 
+    p{
+      margin: 0;
+    }
     span{
       &:nth-child(1){
         color: c.$dark-blue;
@@ -27,6 +30,15 @@
       &:nth-child(2){
         color: #d9534f;
       }
+      &:nth-child(4){
+        color: c.$gray;
+        font-size: .9rem;
+      }
     }
+  }
+  #message_bottom{
+    background-color:c.$white;
+    color: c.$gray;
+    text-align: center;
   }
 }
