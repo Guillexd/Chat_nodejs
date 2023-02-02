@@ -1,0 +1,15 @@
+@use '../abstracts/colors' as c;
+.header_chat{
+  background-color: c.$dark-blue;
+  grid-area: title;
+  i{
+    font-size: 2rem;
+  }
+  button{
+    background-color: white !important;
+    color: c.$dark-blue;
+    &:hover{
+      transform: scale(1.1);
+    }
+  }
+}

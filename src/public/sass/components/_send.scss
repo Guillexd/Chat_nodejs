@@ -1,0 +1,13 @@
+@use '../abstracts/colors' as c;
+.send_chat{
+  grid-area: chat;
+  background-color: c.$blue;
+  height: 100%;
+  form{
+    height: 100%;
+    input{
+        height: 100%;
+        font-size: 1.3rem;
+    }
+  }
+}

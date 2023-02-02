@@ -1,0 +1,32 @@
+@use '../abstracts/colors' as c;
+.messages_chat{
+  grid-area: message;
+  background-color: c.$white;
+  color: black;
+  padding: 2rem;
+  overflow-y: auto;
+  &::-webkit-scrollbar{
+    background-color: unset;
+  }
+  &::-webkit-scrollbar-thumb{
+      background-color: c.$gray;
+      border-radius: 10px;
+  }
+  div{
+    background-color: c.$light-blue;
+    padding: 1rem 10px .1rem 10px;
+    margin: 1rem 0;
+    border-radius: 15px;
+    line-height: 150%;
+    word-wrap: break-word;//wrap 
+    span{
+      &:nth-child(1){
+        color: c.$dark-blue;
+        margin-right: 1rem;
+      }
+      &:nth-child(2){
+        color: #d9534f;
+      }
+    }
+  }
+}

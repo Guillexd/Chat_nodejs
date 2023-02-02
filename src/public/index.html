@@ -21,7 +21,7 @@
         <h1 class="text-center">ChatBot</h1>
         <i class="fa-regular fa-face-smile ms-3"></i>
       </div>
-      <form action="pages/chat.html">
+      <form action="/chat" method="get">
         <div class="mb-3">
           <label for="user_name" class="form-label">User</label>
           <input type="text" class="form-control" id="user_name" aria-describedby="user_desc" name="user_name" id="user_name" required>
@@ -31,9 +31,9 @@
           <label for="option_room" class="form-label">Room</label>
           <select class="form-select" aria-describedby="room_desc" name="option_room" id="option_room">
             <option value="public" selected>Public</option>
-            <option value="senati">SENATI</option>
-            <option value="company">COMPANY</option>
-            <option value="family">FAMILY</option>
+            <option value="senati">Work</option>
+            <option value="company">Friends</option>
+            <option value="family">Family</option>
           </select>
           <div id="room_desc" class="form-text">Choose your room.</div>
         </div>
