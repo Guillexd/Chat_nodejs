@@ -27,6 +27,22 @@ const add_message = (msj) => {
   })
 }
 
+//bot
+const add_message_bot = () => {
+  const div = d.createElement('div');
+  div.innerHTML=`
+    <span>No hay </span><span>xdxdxd</span>
+    <p>aaaaaaaaa</p><span>conexion</span>
+  `;
+  message_bottom.insertAdjacentElement('beforebegin', div); //insert a element before the selected element
+  //bottom scroll when a message is added
+  container_messages.scrollTo({
+    behavior: 'smooth',
+    top: container_messages.scrollHeight
+  })
+}
+
+
 //function to add Room name
 const add_room_name = (room_name) => {
   const div = d.querySelector('#container_room_name');
@@ -121,9 +137,11 @@ socket.on('bot_greetings', (user) => {
 
 // socket to tell users i'm no longer in a room
 socket.on('info_users_ur_no_room', (user) => {
-  const menu = d.querySelector(`.rooms_users_chat`);
-  const old_user = menu.querySelector(`#user_${user.id}`);
-  console.log("Nos vamosssssss");
-  console.log(menu);
-  console.log(old_user);
+  console.log("holaaaaaaaaaaaaaaaa");
+  add_message_bot();
+  // const menu = d.querySelector(`.rooms_users_chat`);
+  // const old_user = menu.querySelector(`#user_${user.id}`);
+  // console.log(menu);
+  // console.log(old_user);
+  // console.log(user);
 })

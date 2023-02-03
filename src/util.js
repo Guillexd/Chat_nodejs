@@ -3,6 +3,8 @@ import { fileURLToPath } from 'url';
 import fs from 'fs';
 import dayjs from 'dayjs';
 
+const users_array = [];
+
 //function dirname
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -48,12 +50,13 @@ export const add_user_info = async(id, user, room, path) => {
 //function to remove user in chat from a json
 export const remove_user_info = async(path, id) => {
   const db_user = await search_user_db(path);
-  console.log(id);
+  console.log("id server: "+id);
   const index = db_user.findIndex(user=>user.id == id);
-  console.log(index);
-  const new_db_user = db_user.splice(0, 1);
+  if(index==-1) return;
+  const new_db_user = db_user.splice(index, 1);
   await fs.promises.writeFile(path, JSON.stringify(db_user));
   return new_db_user;
+
 }
 
 //function to add information about currently chat and put on a json
