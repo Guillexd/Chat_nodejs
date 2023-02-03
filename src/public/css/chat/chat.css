@@ -79,6 +79,14 @@
   color: rgba(0, 0, 0, 0.35);
   font-size: 0.9rem;
 }
+.messages_chat .bot_greetings {
+  padding-bottom: 1rem;
+  background-color: rgba(0, 143, 57, 0.4941176471);
+}
+.messages_chat .bot_greetings span {
+  font-size: 1.3rem;
+  color: rgba(0, 0, 0, 0.35) !important;
+}
 .messages_chat #message_bottom {
   background-color: #F0F8FF;
   color: rgba(0, 0, 0, 0.35);

@@ -36,6 +36,14 @@
       }
     }
   }
+  .bot_greetings{
+    padding-bottom: 1rem;
+    background-color: c.$green;
+    span{
+      font-size: 1.3rem;
+      color: c.$gray !important;
+    }
+  }
   #message_bottom{
     background-color:c.$white;
     color: c.$gray;
