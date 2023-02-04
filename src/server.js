@@ -56,13 +56,12 @@ socketServer.on('connection', async(socket) =>{
   socketServer.emit('info_new_user', new_user)
   })
   //user disconnected
-  socket.on('disconnect', () => {
-    console.log(`user ${id} disconnected`)});
+  socket.on('disconnect', async() => {
+    console.log(`user ${id} disconnected`)
     //socket to tell users you're no longer in a room
-    // const user = await remove_user_info(absolute_path(path), socket.id);//id is retro
-    // if(user){
-    //   socketServer.to(user.room).emit('info_users_ur_no_room', user);
-    //   console.log(user);
-    // }
-    socketServer.to('public').emit('info_users_ur_no_room', {});
+    const user = await remove_user_info(absolute_path(path), socket.id);
+    if(user){
+      socket.broadcast.to(user[0].room).emit('info_users_ur_no_room', user);
+    }
+  });
 })

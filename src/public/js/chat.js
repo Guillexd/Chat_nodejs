@@ -27,22 +27,6 @@ const add_message = (msj) => {
   })
 }
 
-//bot
-const add_message_bot = () => {
-  const div = d.createElement('div');
-  div.innerHTML=`
-    <span>No hay </span><span>xdxdxd</span>
-    <p>aaaaaaaaa</p><span>conexion</span>
-  `;
-  message_bottom.insertAdjacentElement('beforebegin', div); //insert a element before the selected element
-  //bottom scroll when a message is added
-  container_messages.scrollTo({
-    behavior: 'smooth',
-    top: container_messages.scrollHeight
-  })
-}
-
-
 //function to add Room name
 const add_room_name = (room_name) => {
   const div = d.querySelector('#container_room_name');
@@ -67,8 +51,10 @@ const add_users_in_room = (usersObj) => {
 }
 
 //function to remove user from the room
-const remove_user_in_room = () => {
-  
+const remove_user_in_room = (user) => {
+  const menu = d.querySelector(`.rooms_users_chat`);
+  const old_user = menu.querySelector(`#user_${user[0].id}`);
+  menu.removeChild(old_user)
 }
 
 //function to add saves messages
@@ -78,9 +64,30 @@ const add_saved_messages = (messages) => {
   });
 }
 
+//function bot greetings
+const bot_greetings = (user, type) => {
+  const div = d.createElement('div');
+  div.classList.add('bot_greetings');
+  div.innerHTML=`
+    <span>${user}</span>${type}
+  `;
+  message_bottom.insertAdjacentElement('beforebegin', div); //insert a element before the selected element
+  //bottom scroll when a message is added
+  container_messages.scrollTo({
+    behavior: 'smooth',
+    top: container_messages.scrollHeight
+  })
+}
+
 //event ContentLoad that run functions
 d.addEventListener('DOMContentLoaded', ()=>{
   add_room_name(room);
+  d.addEventListener('click', (e)=>{
+    const menu = d.querySelector('.rooms_users_chat');
+    if(e.target.matches('#breakpoint_menu *') && window.innerWidth<763){
+      menu.classList.toggle('breakpoint_menu');
+    }
+  })
 })
 
 //event to add messages in the box
@@ -120,28 +127,13 @@ socket.on('info_new_user', (new_user) => {
 
 //bot tell everybody that i'm in the room
 socket.on('bot_greetings', (user) => {
-  const div = d.createElement('div');
-  div.classList.add('bot_greetings');
-  div.innerHTML=`
-    <span>${user}</span>has joined the chat
-  `;
-  message_bottom.insertAdjacentElement('beforebegin', div); //insert a element before the selected element
-  //bottom scroll when a message is added
-  container_messages.scrollTo({
-    behavior: 'smooth',
-    top: container_messages.scrollHeight
-  })
+  bot_greetings(user, 'has join the chat')
 })
 
 //NEED TO REMAIN CURRENTLY USERS IN CHAT, DONT FORGET IT ...........
 
 // socket to tell users i'm no longer in a room
 socket.on('info_users_ur_no_room', (user) => {
-  console.log("holaaaaaaaaaaaaaaaa");
-  add_message_bot();
-  // const menu = d.querySelector(`.rooms_users_chat`);
-  // const old_user = menu.querySelector(`#user_${user.id}`);
-  // console.log(menu);
-  // console.log(old_user);
-  // console.log(user);
+  remove_user_in_room(user);
+  bot_greetings(user[0].user_name, 'has left the chat');
 })

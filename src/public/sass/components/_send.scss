@@ -1,16 +1,26 @@
 @use '../abstracts/colors' as c;
+@use '../abstracts/breakpoints' as b;
 .send_chat{
   grid-area: chat;
   background-color: c.$blue;
   height: 100%;
   form{
     height: 100%;
+    padding: 20px 15px;
     input{
         height: 100%;
         font-size: 1.3rem;
     }
     i{
       font-size: 1.5rem;
+    }
+  }
+  @media screen and (max-width: b.$breakpoint_m) {
+    form{
+      padding: 10px 15px;
+      input{
+          font-size: 1rem;
+      }
     }
   }
 }

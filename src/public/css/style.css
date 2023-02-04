@@ -13,12 +13,25 @@ main {
   background: -webkit-linear-gradient(to right, #29ffc6, #20e3b2, #0cebeb); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #29ffc6, #20e3b2, #0cebeb); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-main i {
+main #container_login {
+  width: 50%;
+}
+main #container_login i {
   color: black;
   font-size: 2rem;
 }
-main form button {
+main #container_login form button {
   margin: auto;
+  width: 25%;
+}
+@media screen and (max-width: 770px) {
+  main #container_login {
+    width: 95vw;
+    height: 65vh;
+  }
+  main #container_login form button {
+    width: 75%;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -50,7 +50,6 @@ export const add_user_info = async(id, user, room, path) => {
 //function to remove user in chat from a json
 export const remove_user_info = async(path, id) => {
   const db_user = await search_user_db(path);
-  console.log("id server: "+id);
   const index = db_user.findIndex(user=>user.id == id);
   if(index==-1) return;
   const new_db_user = db_user.splice(index, 1);

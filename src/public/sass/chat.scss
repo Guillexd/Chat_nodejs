@@ -1,5 +1,6 @@
 @use './abstracts/colors' as c;
 @use './abstracts/fonts' as f;
+@use './abstracts/breakpoints' as b;
 @use './components/header';
 @use './components/room_user';
 @use './components/messages';
@@ -17,8 +18,8 @@
   height: 100vh;
   background-color: #b7f4ed;
   main{
-    height: 75vh;
-    width: 75vw;
+    height: 85vh;
+    width: 85vw;
     overflow: hidden;
     display: grid;
     grid-template-areas:
@@ -26,8 +27,19 @@
     "menu message"
     "chat chat";
     grid-template-columns: 1fr 3fr;
-    grid-template-rows: 10% auto 15%;
-
-    overflow-anchor: none;
+    grid-template-rows: 10% auto 10%;
+    // overflow-anchor: none;
+    @media screen and (max-width: b.$breakpoint_x){
+      height: 95vh;
+      width: 95vw;
+    }
+    @media screen and (max-width: b.$breakpoint_m){
+    grid-template-areas:
+    "title"
+    "message"
+    "chat";
+    grid-template-columns: 1fr;
+    }
   }
 }
+

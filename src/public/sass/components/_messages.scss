@@ -1,4 +1,5 @@
 @use '../abstracts/colors' as c;
+@use '../abstracts/breakpoints' as b;
 .messages_chat{
   grid-area: message;
   background-color: c.$white;
@@ -48,5 +49,36 @@
     background-color:c.$white;
     color: c.$gray;
     text-align: center;
+  }
+  @media screen and (max-width: b.$breakpoint_m){
+    padding: .5rem .4rem 0rem 1rem;
+    &::-webkit-scrollbar-thumb{
+      background-color: unset;
+    }
+    div{
+      span{
+        &:nth-child(1){
+          font-size: .9rem;
+        }
+        &:nth-child(2){
+          color: #d9534f;
+          font-size: .8rem;
+        }
+        &:nth-child(4){
+          font-size: .7rem;
+        }
+      }
+    }
+    .bot_greetings{
+      span{
+        font-size: 1.1rem !important;
+      }
+    }
+    #message_bottom{
+      background-color:c.$white;
+      color: c.$gray;
+      text-align: center;
+      padding: 0;
+    }
   }
 }
