@@ -50,6 +50,14 @@
     color: c.$gray;
     text-align: center;
   }
+  iframe, img, video{
+    width: 50%;
+    display: flex;
+    transform: translateX(50%);
+    border-radius: 10px;
+    border: 2px solid black;
+    overflow: hidden;
+  }
   @media screen and (max-width: b.$breakpoint_m){
     padding: .5rem .4rem 0rem 1rem;
     &::-webkit-scrollbar-thumb{
@@ -79,6 +87,10 @@
       color: c.$gray;
       text-align: center;
       padding: 0;
+    }
+    iframe, img, video{
+      width: 100%;
+      transform: translateX(0%);
     }
   }
 }

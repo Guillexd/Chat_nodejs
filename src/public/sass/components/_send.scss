@@ -6,20 +6,53 @@
   height: 100%;
   form{
     height: 100%;
-    padding: 20px 15px;
+    padding: 20px 0 20px 15px;
     input{
-        height: 100%;
-        font-size: 1.3rem;
+      height: 100%;
+      font-size: 1.3rem;
+      width: 95%;
     }
     i{
       font-size: 1.5rem;
     }
+    button{
+      width: 5%;
+    }
+  }
+  button{
+    position: relative;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i{
+      position: absolute;
+    }
+    #form_files{
+      opacity: 0;
+      width: 10px;
+      padding: 1rem 1.5rem;
+    }
+  }
+  @media screen and (max-width: b.$breakpoint_x){
+    form{
+      input{
+        width: 85%;
+      }
+      button{
+        width: 15%;
+      }
+    }
   }
   @media screen and (max-width: b.$breakpoint_m) {
     form{
-      padding: 10px 15px;
+      padding: 10px 0 10px 15px;
       input{
-          font-size: 1rem;
+        font-size: 1rem;
+        width: 80%;
+      }
+      button{
+        width: 20%;
       }
     }
   }

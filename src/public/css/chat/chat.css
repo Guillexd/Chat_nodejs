@@ -111,6 +111,14 @@
   color: rgba(0, 0, 0, 0.35);
   text-align: center;
 }
+.messages_chat iframe, .messages_chat img, .messages_chat video {
+  width: 50%;
+  display: flex;
+  transform: translateX(50%);
+  border-radius: 10px;
+  border: 2px solid black;
+  overflow: hidden;
+}
 @media screen and (max-width: 762px) {
   .messages_chat {
     padding: 0.5rem 0.4rem 0rem 1rem;
@@ -137,6 +145,10 @@
     text-align: center;
     padding: 0;
   }
+  .messages_chat iframe, .messages_chat img, .messages_chat video {
+    width: 100%;
+    transform: translateX(0%);
+  }
 }
 
 .send_chat {
@@ -146,21 +158,52 @@
 }
 .send_chat form {
   height: 100%;
-  padding: 20px 15px;
+  padding: 20px 0 20px 15px;
 }
 .send_chat form input {
   height: 100%;
   font-size: 1.3rem;
+  width: 95%;
 }
 .send_chat form i {
   font-size: 1.5rem;
 }
+.send_chat form button {
+  width: 5%;
+}
+.send_chat button {
+  position: relative;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.send_chat button i {
+  position: absolute;
+}
+.send_chat button #form_files {
+  opacity: 0;
+  width: 10px;
+  padding: 1rem 1.5rem;
+}
+@media screen and (max-width: 1100px) {
+  .send_chat form input {
+    width: 85%;
+  }
+  .send_chat form button {
+    width: 15%;
+  }
+}
 @media screen and (max-width: 762px) {
   .send_chat form {
-    padding: 10px 15px;
+    padding: 10px 0 10px 15px;
   }
   .send_chat form input {
     font-size: 1rem;
+    width: 80%;
+  }
+  .send_chat form button {
+    width: 20%;
   }
 }
 

@@ -3,8 +3,10 @@
 const socket = io();
 
 const d = document;
-const form_chat = d.querySelector('form');
+const form_chat = d.querySelector('.send_chat');
+const form_file = d.querySelector('#input_to_send');
 const container_messages = d.querySelector('.messages_chat');
+const files = d.querySelector('#form_files');
 const message_bottom = d.querySelector('#message_bottom');
 
 //url queries 
@@ -57,13 +59,6 @@ const remove_user_in_room = (user) => {
   menu.removeChild(old_user)
 }
 
-//function to add saves messages
-const add_saved_messages = (messages) => {
-  messages.forEach(message => {
-    add_message(message);
-  });
-}
-
 //function bot greetings
 const bot_greetings = (user, type) => {
   const div = d.createElement('div');
@@ -77,6 +72,46 @@ const bot_greetings = (user, type) => {
     behavior: 'smooth',
     top: container_messages.scrollHeight
   })
+}
+
+//functions to show docs in chat
+const show_docs = (doc_name) => {
+  const ext = Array.from(doc_name.url).reverse().join("").split(".")[0].split("").reverse().join("");
+  if(ext == 'pdf'){
+    const div = d.createElement('div');
+    div.innerHTML=`
+    <span>${doc_name.name}</span><span>${doc_name.day}</span>
+    <iframe src="/uploads/${doc_name.url}" frameborder="0"></iframe><span>${doc_name.date}</span>
+    `;
+    message_bottom.insertAdjacentElement('beforebegin', div); //insert a element before the selected element
+    //bottom scroll when a message is added
+    container_messages.scrollTo({
+      behavior: 'smooth',
+      top: container_messages.scrollHeight
+    })
+  } else if (ext == 'jpg' || ext == 'jpeg' || ext == 'png'){
+    const div = d.createElement('div');
+    div.innerHTML=`
+    <span>${doc_name.name}</span><span>${doc_name.day}</span>
+    <img src="/uploads/${doc_name.url}" alt="${doc_name.url}"><span>${doc_name.date}</span>
+    `;
+    message_bottom.insertAdjacentElement('beforebegin', div); //insert a element before the selected element
+    container_messages.scrollTo({
+      behavior: 'smooth',
+      top: container_messages.scrollHeight
+    })
+  } else if (ext == 'mp4'){
+    const div = d.createElement('div');
+    div.innerHTML=`
+    <span>${doc_name.name}</span><span>${doc_name.day}</span>
+    <video src="/uploads/${doc_name.url}" controls></video><span>${doc_name.date}</span>
+    `;
+    message_bottom.insertAdjacentElement('beforebegin', div); //insert a element before the selected element
+    container_messages.scrollTo({
+      behavior: 'smooth',
+      top: container_messages.scrollHeight
+    })
+  }
 }
 
 //event ContentLoad that run functions
@@ -101,12 +136,40 @@ form_chat.addEventListener('submit', (e)=>{
   d.querySelector('input').focus();
 })
 
+//event to send images, videos and so on
+files.addEventListener('change', (e) => {
+  const files = e.target.files;
+  //allow a not array use array methods (Array.from())
+  Array.from(files).forEach(file=>{
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    fetch("/chat", {
+      method: "POST",
+      body: formData
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      const doc_name = data.message[0].filename;
+      socket.emit('file_was_sent', doc_name);
+    });
+  })
+});
+
 //socket about tell server that you are in a room for messages and show you're there
 socket.emit('info_room_show_user', {room, user});
 
 //socket about information of saved messages
-socket.on('info_saved_messages', (msj) => {
-  add_saved_messages(msj);
+socket.on('info_saved_messages', (msjs) => {
+  msjs.forEach(msj=>{
+    if(msj.message){
+      add_message(msj);
+    }
+    if(msj.url){
+      show_docs(msj)
+    }
+  })
 })
 
 //socket about information of new message
@@ -136,4 +199,10 @@ socket.on('bot_greetings', (user) => {
 socket.on('info_users_ur_no_room', (user) => {
   remove_user_in_room(user);
   bot_greetings(user[0].user_name, 'has left the chat');
+})
+
+//sochet to show docs that were sent
+socket.on('show_files', (doc) => {
+  show_docs(doc);
+  console.log(doc);
 })

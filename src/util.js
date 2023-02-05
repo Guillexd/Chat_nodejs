@@ -74,3 +74,19 @@ export const add_chat = async(path, msj) => {
   await fs.promises.writeFile(path, JSON.stringify(db));
   return chat_obj;
 }
+
+export const add_chat_doc = async(path, user, doc_name) => {
+  let now = dayjs()
+  const chat_obj = {
+    id: await generate_id(path),
+    name: user,
+    url: doc_name,
+    day: now.format('dddd, H:mm a'),
+    date: now.format('MMMM D, YYYY')
+  }
+
+  const db = await search_db(path);
+  db.push(chat_obj);
+  await fs.promises.writeFile(path, JSON.stringify(db));
+  return chat_obj;
+}

@@ -1,8 +1,10 @@
 import express from "express";
-import { add_chat, absolute_path, search_db, add_user_info, search_user_db, remove_user_info } from "./util.js";
+import charRouter from './routes/chat.router.js'
+import { add_chat, absolute_path, search_db, add_user_info, search_user_db, remove_user_info, add_chat_doc } from "./util.js";
 import { Server } from "socket.io";
 
 const server = express();
+// server.use(cors());  //cors() as middleware 
 
 //default settings
 server.use(express.json());
@@ -10,10 +12,8 @@ server.use(express.urlencoded({extended:true}));
 //publid folder(static)
 server.use(express.static(absolute_path('/public')))
 
-//router
-server.get('/chat', (req, res)=>{
-  res.status(200).sendFile(absolute_path('/public/pages/chat.html'));
-})
+//routing
+server.use('/chat', charRouter);
 
 //http
 const PORT = 8080 || process.env.PORT;
@@ -43,6 +43,10 @@ socketServer.on('connection', async(socket) =>{
       const msj = { user, mensaje }
       const info_msj = await add_chat(absolute_path(`/chat/${room}.json`), msj)
       socketServer.to(room).emit('info_chat_message', info_msj);
+    })
+    socket.on('file_was_sent', async(doc_name)=>{
+      const doc = await add_chat_doc(absolute_path(`/chat/${room}.json`), user, doc_name);
+      socketServer.to(room).emit('show_files', doc);
     })
   })
   //USERS
