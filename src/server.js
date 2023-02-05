@@ -17,8 +17,8 @@ server.use('/chat', charRouter);
 
 //http
 const PORT = 8080 || process.env.PORT;
-const hostname = '192.168.0.38';
-const httpServer = server.listen(PORT, hostname, ()=> console.log(`Listening trought port: ${PORT}`));
+// const hostname = '192.168.0.38';
+const httpServer = server.listen(PORT, ()=> console.log(`Listening trought port: ${PORT}`));
 
 //socket.io back-end
 const socketServer = new Server(httpServer);
