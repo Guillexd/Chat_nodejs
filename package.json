@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "js/chat.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js"
@@ -19,5 +19,8 @@
     "nodemon": "^2.0.20",
     "sass": "^1.57.1",
     "socket.io": "^4.5.4"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
