@@ -18,6 +18,7 @@ const generate_id = async(path) => {
 //function search database
 export const search_db = async(path) => {
   if(!fs.existsSync(path)) return [];
+  console.log('ruta?: '+path);
   let db = await fs.promises.readFile(path, 'utf-8');
   db = JSON.parse(db);
   return db;

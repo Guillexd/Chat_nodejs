@@ -19,6 +19,7 @@
   background-color: #00BFFF;
   overflow-y: auto;
   overflow-x: hidden;
+  z-index: 999;
 }
 .rooms_users_chat i {
   margin: 0 8px 0 0 !important;
